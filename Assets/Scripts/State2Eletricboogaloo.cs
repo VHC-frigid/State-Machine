@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class State2Eletricboogaloo : MonoBehaviour
 {
+    public Material black;
     private RandomColour randomColour;
     public Transform player;
     public enum States
@@ -82,7 +83,7 @@ public class State2Eletricboogaloo : MonoBehaviour
         float startTime = Time.time;
         while (state == States.Run)
         {
-
+            randomColour.PickBlack();
             Wobble();
             float shimmy = Mathf.Sin(Time.time * 30f) * 0.9f + 0.3f;
             transform.position += transform.right * 1f * Time.deltaTime * 5f;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class RandomColour : MonoBehaviour
@@ -17,6 +18,14 @@ public class RandomColour : MonoBehaviour
     public void PickRandom()
     {
         Color randomColour = Random.ColorHSV();
+        propertyBlock.SetColor("_Color", randomColour);
+        renderer.SetPropertyBlock(propertyBlock);
+    }
+
+    public void PickBlack()
+    {
+        Color randomColour = Color.black;
+        //"_Colour" is albedo behind the scene's, propertyblock is the 
         propertyBlock.SetColor("_Color", randomColour);
         renderer.SetPropertyBlock(propertyBlock);
     }
