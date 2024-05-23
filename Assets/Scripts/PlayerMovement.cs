@@ -14,9 +14,21 @@ public class PlayerMovement : MonoBehaviour
     public Camera camera;
     public float speed = 5f;
     public LayerMask groundMask;
+
+    [SerializeField] private Animator anim;
     
     private void Start()
     {
+        
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
+        if (anim == null)
+        {
+            Debug.Log("don't forget to set animator for your player");
+        }
+        
         rb = GetComponent<Rigidbody>();
 
         if (camera == null)
@@ -35,6 +47,15 @@ public class PlayerMovement : MonoBehaviour
             input.Normalize();
         }
 
+        if (input.magnitude > 0.1f)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
+
         //Relational Movement
         float inputMag = input.magnitude;
         input = camera.transform.TransformDirection(input);
@@ -46,6 +67,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
+        }
+
+        //rotate towards input direction
+        if(input.magnitude > 0.1f)
+        {
+            Quaternion rotation = Quaternion.LookRotation(input);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
         }
 
     }
