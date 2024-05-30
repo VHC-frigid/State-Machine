@@ -53,10 +53,16 @@ public class NetCapture : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        State2EletricboogalooAgressive sm = other.GetComponent<State2EletricboogalooAgressive>();
-        if (sm != null)
+        State2EletricboogalooAgressive sma = other.GetComponent<State2EletricboogalooAgressive>();
+        if (sma != null)
         {
-            sm.state = State2EletricboogalooAgressive.States.Idle;
+            sma.state = State2EletricboogalooAgressive.States.Idle;
+            StartCoroutine(Capture(other.gameObject));
+        }
+        State2EletricboogalooPassive smp = other.GetComponent<State2EletricboogalooPassive>();
+        if (smp != null)
+        {
+            smp.state = State2EletricboogalooPassive.States.Idle;
             StartCoroutine(Capture(other.gameObject));
         }
     }
