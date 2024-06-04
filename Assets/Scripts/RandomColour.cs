@@ -6,11 +6,11 @@ using UnityEngine;
 public class RandomColour : MonoBehaviour
 {
     private MaterialPropertyBlock propertyBlock;
-    private Renderer renderer;
+    private Renderer rendered;
     
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        rendered = GetComponent<Renderer>();
         propertyBlock = new MaterialPropertyBlock();
         PickRandom();
     }
@@ -19,7 +19,7 @@ public class RandomColour : MonoBehaviour
     {
         Color randomColour = Random.ColorHSV();
         propertyBlock.SetColor("_Color", randomColour);
-        renderer.SetPropertyBlock(propertyBlock);
+        rendered.SetPropertyBlock(propertyBlock);
     }
 
     public void PickBlack()
@@ -27,7 +27,7 @@ public class RandomColour : MonoBehaviour
         Color randomColour = Color.black;
         //"_Colour" is albedo behind the scene's, propertyblock is the 
         propertyBlock.SetColor("_Color", randomColour);
-        renderer.SetPropertyBlock(propertyBlock);
+        rendered.SetPropertyBlock(propertyBlock);
     }
 
     private float H = 0;
@@ -40,7 +40,7 @@ public class RandomColour : MonoBehaviour
         }
         Color newColor = Color.HSVToRGB(H, 1, 1);
         propertyBlock.SetColor("_Color", newColor);
-        renderer.SetPropertyBlock(propertyBlock);
+        rendered.SetPropertyBlock(propertyBlock);
     }
 
 }

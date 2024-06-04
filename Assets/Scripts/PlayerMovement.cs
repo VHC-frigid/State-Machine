@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 input;
     private bool isGrounded;
 
-    public Camera camera;
+    public Camera cameras;
     public float speed = 5f;
     public LayerMask groundMask;
 
@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
         
         rb = GetComponent<Rigidbody>();
 
-        if (camera == null)
+        if (cameras == null)
         {
-            camera = Camera.main;
+            cameras = Camera.main;
         }
     }
     
@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Relational Movement
         float inputMag = input.magnitude;
-        input = camera.transform.TransformDirection(input);
+        input = cameras.transform.TransformDirection(input);
         input.y = 0f;
         input.Normalize();
         input *= inputMag;
